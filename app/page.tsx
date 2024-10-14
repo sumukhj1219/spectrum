@@ -1,9 +1,18 @@
 import React from 'react'
+import Login from './login/page'
+import { auth } from '@/auth'
 
-const HomePage = () => {
+const HomePage = async() => {
+  const session = await auth()
+
+  if (session) {
+    return <div>
+      <Login />
+    </div>
+  }
   return (
     <div>
-      Home PAge
+      Welcome
     </div>
   )
 }

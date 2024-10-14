@@ -32,7 +32,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token, account }) {
         if (account) {
-          // First-time login, save the `access_token`, its expiry, and the `refresh_token`
           return {
             ...token,
             access_token: account.access_token,
@@ -40,15 +39,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             refresh_token: account.refresh_token ?? '', // Use an empty string as fallback
           };
         }else if (Date.now() < Number(token.expires_at) * 1000) {
-            // Subsequent logins, but the `access_token` is still valid
             return token;
           }
         else {
-          // Subsequent logins, but the `access_token` has expired, try to refresh it
           if (!token.refresh_token) throw new TypeError("Missing refresh_token");
       
           try {
-            // Use Spotify's token endpoint to refresh the access token
             const response = await fetch("https://accounts.spotify.com/api/token", {
               method: "POST",
               headers: {
@@ -89,10 +85,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
       },
       
-    async session({ session, token }) {
-        if (typeof token.id === 'string') {
+    async session({ session, token, user }) {
             session.user.id = token.id; // Assign the id to session.user.id
-          }
           return session
     },
   },
@@ -101,14 +95,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 declare module "next-auth" {
     interface Session {
       error?: "RefreshTokenError";
+      token:string
+      id?:string
       user: {
-        id?: string; // Optional since it may not be present
-        // Add other user properties as needed
+        id?: string; 
       };
     }
   }
-  
-  
     interface JWT {
       access_token: string;
       expires_at: number;
