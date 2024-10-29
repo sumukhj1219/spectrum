@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
     <SessionProvider>
       <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-800 m-2 max-w-7xl items-center justify-center mx-auto`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-r from-black from-10% via-gray-900 via-30% to-black to-90% m-2 max-w-7xl items-center justify-center mx-auto`}
       >
         <Navbar />
         {children}

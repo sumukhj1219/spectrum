@@ -5,7 +5,6 @@ import { useSession } from 'next-auth/react';
 
 const Navbar = () => {
   const { data: session } = useSession();
-
   return (
     <div className="max-w-7xl mx-auto bg-gray-900 p-2 z-10 m-2 rounded-xl border-gray-400 border-2 border-dashed flex justify-between items-center fixed">
       <h1 className='text-3xl font-bold text-white m-1'>
