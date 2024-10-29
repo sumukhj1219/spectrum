@@ -11,7 +11,7 @@ const Navbar = () => {
       <h1 className='text-3xl font-bold text-white m-1'>
         WELCOME
       </h1>
-      <Link href={'/login'} className='flex'>
+      <Link href={session?.user ? '/' : '/login'} className='flex'>
         <span className='bg-black text-white rounded-lg px-4 py-2 flex items-center border-green-500 border'>
           {
             session?.user ? (

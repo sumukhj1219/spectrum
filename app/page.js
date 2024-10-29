@@ -8,8 +8,6 @@ export default async function Home() {
 
   return (
     <div>
-      <img src={session.user.image} alt="User Avatar" />
-      <h1>Welcome, {session.user.name}!</h1>
     </div>
   );
 }
