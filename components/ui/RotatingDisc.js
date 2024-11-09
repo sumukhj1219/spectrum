@@ -15,7 +15,7 @@ const RotatingDisc = (props) => {
 
   return (
     <div 
-      className="size-96 rounded-full transition-transform duration-100 ease hover:grayscale relative flex items-center justify-center" 
+      className="size-96 rounded-full transition-transform duration-100 ease relative flex items-center justify-center" 
       style={{
         backgroundImage: `url(${imgUrl || '/honeysingh.jpg'})`, 
         backgroundSize: 'cover', 

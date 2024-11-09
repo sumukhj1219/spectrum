@@ -66,6 +66,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
 
     async session({ session, token }) {
+      session.user.id = token.id
       session.access_token = token.access_token; // Make access_token available in the session
       session.error = token.error; // Handle errors
       return session;
