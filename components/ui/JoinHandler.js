@@ -19,7 +19,7 @@ const JoinHandler = () => {
       const response = await axios.post('/api/joinRoom', { roomId , useremail });
       setRoomId("")
       
-      router.push(`/joinRoom/${response.data.roomId}`);
+      // router.push(`/joinRoom/${response.data.roomId}`);
     } catch (error) {
       console.error('Failed to join room:', error);
     }
