@@ -14,9 +14,9 @@ const JoinHandler = () => {
   
   const handleClick = async () => {
     try {
-      const userId = session?.user.access_token
+      const useremail = session?.user.email
       console.log(session)
-      const response = await axios.post('/api/joinRoom', { roomId , userId });
+      const response = await axios.post('/api/joinRoom', { roomId , useremail });
       setRoomId("")
       
       router.push(`/joinRoom/${response.data.roomId}`);
