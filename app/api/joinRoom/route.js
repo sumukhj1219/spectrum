@@ -5,18 +5,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 export async function POST(req) {
   try {
-    
-  } catch (error) {
-    
-  }
-  const { roomId, useremail } = await req.json();
+    const { roomId, useremail } = await req.json();
 
   const session = await auth();
 
   if (!useremail) {
     await prisma.user.create({
       data: {
-        id: uuidv4(),
         name: session?.user.name,
         email: session?.user.email
       }
@@ -69,4 +64,9 @@ export async function POST(req) {
   });
 
   return NextResponse.json({ roomId }, { status: 200 });
+  } catch (error) {
+  return NextResponse.json({ status: 404 });
+    
+  }
+  
 }
