@@ -5,8 +5,10 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 import axios from "axios";
 import { useRouter } from 'next/navigation'; 
+import { useSession } from "next-auth/react"
 
 const JoinHandler = () => {
+  const { data: session } = useSession()
   const [roomId, setRoomId] = useState("");
   const router = useRouter();  
   const [error, setError] = useState(null);  // Error state
@@ -19,7 +21,7 @@ const JoinHandler = () => {
     }
 
     try {
-      const useremail = session?.user.email;
+      const useremail = session?.user?.email;
 
       const response = await axios.post('/api/joinRoom', { roomId, useremail });
 
