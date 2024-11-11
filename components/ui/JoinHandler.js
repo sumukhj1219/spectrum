@@ -5,19 +5,13 @@ import Button from "@/components/Button";
 import Input from "@/components/Input";
 import axios from "axios";
 import { useRouter } from 'next/navigation'; 
-import { useSession } from '@/auth';
 
 const JoinHandler = () => {
   const [roomId, setRoomId] = useState("");
-  const { data: session, status } = useSession();  // Added `status` for loading check
   const router = useRouter();  
   const [error, setError] = useState(null);  // Error state
 
   const handleClick = async () => {
-    if (!session) {
-      setError('You must be logged in to join a room');
-      return;
-    }
 
     if (!roomId) {
       setError('Room ID is required');
