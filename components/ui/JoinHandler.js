@@ -44,8 +44,8 @@ const JoinHandler = () => {
         />
         {error && <div className="text-red-500 mt-2">{error}</div>}  {/* Error message display */}
         <Button
-          name={loading ? 'Joining...' : 'Join'}  // Show loading text
-          className={`bg-green-400 w-32 py-2 text-white font-bold rounded-lg mt-6 border-green-950 ${loading ? 'cursor-not-allowed' : ''}`}
+          name={'Join'}  // Show loading text
+          className={`bg-green-400 w-32 py-2 text-white font-bold rounded-lg mt-6 border-green-950 $`}
           onClick={handleClick}
         />
       </div>
