@@ -5,7 +5,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 export async function POST(req) {
   try {
-    const { roomId, useremail } = await req.json();
+    
+  } catch (error) {
+    
+  }
+  const { roomId, useremail } = await req.json();
 
   const session = await auth();
 
@@ -63,11 +67,6 @@ export async function POST(req) {
       },
     },
   });
+
   return NextResponse.json({ roomId }, { status: 200 });
-
-  } catch (error) {
-    return NextResponse.json({ status: 200 });
-  }
-  
-
 }
