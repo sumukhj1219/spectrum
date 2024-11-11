@@ -1,7 +1,6 @@
 import prisma from "@/utils/db";
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
-import { v4 as uuidv4 } from 'uuid';
 
 export async function POST(req) {
   try {
@@ -25,7 +24,6 @@ export async function POST(req) {
     });
 
     if (!room) {
-      // If the room does not exist, create it
       room = await prisma.room.create({
         data: {
           id: roomId,
@@ -40,7 +38,6 @@ export async function POST(req) {
     });
 
     if (!user) {
-      // If the user does not exist, create it with a generated UUID
       user = await prisma.user.create({
         data: {
           name: session?.user.name || "Default Name",
