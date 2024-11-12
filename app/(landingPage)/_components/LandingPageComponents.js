@@ -19,7 +19,7 @@ const LandingPageComponents = () => {
           <Spectrum />
         </div>
         <div className='col-span-2'>
-          <RotatingDisc imgUrl='/KGF.webp' size={96} />
+          <RotatingDisc imgUrl='/kgf.webp' size={96} />
         </div>
       </div>
 
