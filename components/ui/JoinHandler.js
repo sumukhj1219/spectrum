@@ -29,8 +29,7 @@ const JoinHandler = () => {
       setError(null);  // Clear any previous errors
 
       router.push(`/joinRoom/${response.data.roomId}`);
-    } catch (error) {
-      console.error('Failed to join room:', error);
+    } catch (e) {
       setError('Failed to join room. Please try again later.');
     } 
   };

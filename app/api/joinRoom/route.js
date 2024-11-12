@@ -6,10 +6,8 @@ export async function POST(req) {
   try {
     const { roomId, useremail } = await req.json();
 
-    const session = await auth();
-    
     if (!roomId) {
-      return NextResponse.json({ message: 'Room ID is required' }, { status: 400 });
+      return NextResponse.json({ message: 'Room ID is required' }, { status: 404 });
     }
 
     let room = await prisma.room.findUnique({
@@ -19,7 +17,6 @@ export async function POST(req) {
     if (!room) {
       return NextResponse.json({message: 'No room exist'}, {status: 404})
     }
-
 
     await prisma.user.update({
       where: { email: useremail },
@@ -32,7 +29,7 @@ export async function POST(req) {
 
     return NextResponse.json({ roomId, message: 'User added to room successfully' }, { status: 200 });
   } catch (error) {
-    console.error('Error in joining room:', error); // Log the error for debugging
-    return NextResponse.json({ message: 'Internal Server Error', error: error.message }, { status: 500 });
+    console.error('Error in joining room:', error); 
+    return NextResponse.json({ message: 'Internal Server Error', error: error.message }, { status: 404 });
   }
 }
