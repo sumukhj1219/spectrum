@@ -7,14 +7,7 @@ export async function POST(req) {
     const { roomId, useremail } = await req.json();
 
     const session = await auth();
-    if (!session) {
-      return NextResponse.json({ message: 'Not authenticated' }, { status: 401 });  // Return 401 if authentication fails
-    }
-
-    if (!useremail) {
-      return NextResponse.json({ message: 'User email is required' }, { status: 400 });
-    }
-
+    
     if (!roomId) {
       return NextResponse.json({ message: 'Room ID is required' }, { status: 400 });
     }
@@ -24,29 +17,10 @@ export async function POST(req) {
     });
 
     if (!room) {
-      room = await prisma.room.create({
-        data: {
-          id: roomId,
-          name: roomId,
-        },
-      });
+      return NextResponse.json({message: 'No room exist'}, {status: 404})
     }
 
-    // Check if the user exists
-    let user = await prisma.user.findUnique({
-      where: { email: useremail },
-    });
 
-    if (!user) {
-      user = await prisma.user.create({
-        data: {
-          name: session?.user.name || "Default Name",
-          email: useremail,
-        },
-      });
-    }
-
-    // Update the user's rooms connection
     await prisma.user.update({
       where: { email: useremail },
       data: {

@@ -2,11 +2,21 @@
 import React, { useState } from 'react'
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
 
-const JoinHandler = () => {
+const CreateRoomHandler = () => {
   const [roomId, setRoomId] = useState("")
+  const {data: session} = useSession()
 
-  function handleJoin() {
+  const useremail = session?.user?.email
+  const username = session?.user?.name
+ 
+
+  async function handleCreate() {
+    const response = await axios.post('/api/createRoom', {username, useremail, roomId})
+    if(response.status === 200)
+      console.log('Room created successfully')
     console.log(roomId)
   }
 
@@ -23,11 +33,11 @@ const JoinHandler = () => {
         <Button
           name={'Create'}
           className={'bg-green-400 w-32 py-2 text-white font-bold rounded-lg mt-6 border-green-950'}
-          onClick={handleJoin}
+          onClick={handleCreate}
         />
       </div>
     </div>
   )
 }
 
-export default JoinHandler;
+export default CreateRoomHandler;

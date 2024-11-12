@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,18 +5,25 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
-  id      String      @id 
-  email   String   @unique
-  name    String
-  rooms   Room[]   @relation("UserRooms")
+  id           String   @id @default(uuid())  // Automatically generate a UUID
+  email        String   @unique
+  name         String
+  rooms        Room[]   @relation("UserRooms")         // Many-to-many relation for rooms user participates in
+  createdRooms Room[]   @relation("RoomCreator")       // Rooms created by the user
+  createdAt    DateTime @default(now())                // Track creation time
+  updatedAt    DateTime @updatedAt                     // Track update time
 }
 
 model Room {
-  id      String   @id 
-  name    String
-  users   User[]   @relation("UserRooms")
+  id          String   @id @default(uuid())            // Automatically generate a UUID
+  name        String
+  users       User[]   @relation("UserRooms")          // Many-to-many relation for users in the room
+  createdBy   User     @relation("RoomCreator", fields: [createdById], references: [id]) // Track the creator of the room
+  createdById String
+  createdAt   DateTime @default(now())                 // Track creation time
+  updatedAt   DateTime @updatedAt                      // Track update time
 }
-
