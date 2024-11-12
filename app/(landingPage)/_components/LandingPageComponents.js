@@ -37,6 +37,13 @@ const LandingPageComponents = () => {
       <Card imageUrl={'/family.jpg'} placeholder={'Create memories with family, powered by Spectrum'}/>
       </div>
 
+      <div className='flex items-center justify-between'>
+      <Card imageUrl={'/friends.avif'} placeholder={'Good vibes with great friends, only on Spectrum.'}/>
+      <Image src={'/chess.webp'} width={300} height={300} alt='image' unoptimized={true} className='mb-20 hover:rotate-90 transition-all ease-in duration-1000 brightness-100'/>
+      <Card imageUrl={'/samay.webp'} placeholder={'Create your vibe—stream and host rooms with Spectrum.'}/>
+      </div>
+      
+
       <div className='flex items-center justify-center mx-auto m-20'>
         <Image
           src='/flowchart.png'
