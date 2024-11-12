@@ -5,6 +5,7 @@ import RotatingDisc from '@/components/ui/RotatingDisc';
 import Spectrum from '@/components/ui/Spectrum';
 import Image from 'next/image';
 import Card from '@/components/Card';
+import Sanskrit from '@/components/ui/Sanskrit';
 
 const LandingPageComponents = () => {
   return (
@@ -12,7 +13,7 @@ const LandingPageComponents = () => {
       <Languages />
       <div className='grid grid-cols-6'>
         <div className='col-span-2'>
-          <RotatingDisc imgUrl='/honeysingh.webp' size={96} />
+          <RotatingDisc imgUrl='/blueeyes.webp' size={96} />
         </div>
         <div className='col-span-2 border-l-4 border-yellow-400 border-dashed'>
           <Spectrum />
@@ -30,7 +31,11 @@ const LandingPageComponents = () => {
         </div>
       </div>
 
-      <Card imageUrl={'/cafe.jpg'}/>
+      <div className='flex justify-between items-center'>
+      <Card imageUrl={'/cafe.jpg'} placeholder={'Brew your perfect playlist with Spectrum.'}/>
+        <Sanskrit />
+      <Card imageUrl={'/family.jpg'} placeholder={'Create memories with family, powered by Spectrum'}/>
+      </div>
 
       <div className='flex items-center justify-center mx-auto m-20'>
         <Image
