@@ -11,10 +11,11 @@ const JoinHandler = () => {
   const { data: session } = useSession()
   const [roomId, setRoomId] = useState("");
   const router = useRouter();  
-  const [error, setError] = useState(null);  // Error state
+  const [error, setError] = useState(null); 
+  const [loading, setLoading] = useState(false) // Error state
 
   const handleClick = async () => {
-
+    setLoading(true)
     if (!roomId) {
       setError('Room ID is required');
       return;
@@ -25,6 +26,7 @@ const JoinHandler = () => {
 
       const response = await axios.post('/api/joinRoom', { roomId, useremail });
 
+      setLoading(false)
       setRoomId("");  // Clear room ID after success
       setError(null);  // Clear any previous errors
 
@@ -45,7 +47,7 @@ const JoinHandler = () => {
         />
         {error && <div className="text-red-500 mt-2">{error}</div>}  {/* Error message display */}
         <Button
-          name={'Join'}  // Show loading text
+          name={loading ? 'Joining' : 'Join'}  // Show loading text
           className={`bg-green-400 w-32 py-2 text-white font-bold rounded-lg mt-6 border-green-950 $`}
           onClick={handleClick}
         />

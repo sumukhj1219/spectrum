@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 import { Buffer } from "buffer"; // If you need to encode credentials
-
+import prisma from "./utils/db";
 // Define Spotify scopes
 const scope =
   "user-read-recently-played user-read-playback-state user-top-read user-modify-playback-state user-read-currently-playing user-follow-read playlist-read-private user-read-email user-read-private user-library-read playlist-read-collaborative";
@@ -30,6 +30,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.refresh_token = account.refresh_token || "";
       }
       // Refresh token if expired
+    
+        // await prisma.user.update({
+        //   where: { email: token.email },
+        //   data: { creatorAccessToken: account.access_token }
+        // });
+      
+
       if (Date.now() < token.expires_at) {
         return token;
       }
