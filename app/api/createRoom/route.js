@@ -2,7 +2,7 @@ import prisma from "@/utils/db"
 import { redirect } from "next/navigation"
 import { NextRequest, NextResponse } from "next/server"
 import { auth } from "@/auth"
-
+import axios from "axios"
 export async function POST(req) {
     try {
         const { username, useremail, roomId } = await req.json()
@@ -16,12 +16,21 @@ export async function POST(req) {
             return NextResponse.json({ message: 'Room ID must be at least one character' }, { status: 400 })
         }
 
+        const response = await axios.get('https://api.spotify.com/v1/me', {
+            headers: {
+                Authorization: `Bearer ${session.access_token}`
+            }
+        });
+
+        console.log(response.data.id)
+
         const user = await prisma.user.upsert({
             where: { email: useremail },
             update: {},
             create: {
                 email: useremail,
                 name: username,
+                spotifyId: response.data.id
             }
         })
 
@@ -36,7 +45,8 @@ export async function POST(req) {
                     name: `Room for ${username}`,
                     createdBy: {
                         connect: { id: user.id }
-                    }
+                    },
+                    spotifyId: response.data.id
                 }
             })
         }
@@ -44,7 +54,7 @@ export async function POST(req) {
         await prisma.user.update({
             where: { id: user.id },
             data: {
-                creatorAccessToken: session?.access_token,
+                spotifyId: response.data.id,
                 rooms: {
                     connect: { id: room.id }
                 }

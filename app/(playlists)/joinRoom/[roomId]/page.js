@@ -15,10 +15,7 @@ const PlaylistPage = async({ params }) => {
     },
   });
 
-  const user = await prisma.user.findUnique({
-    where:{email: session?.user.email},
-    
-  })
+  console.log(room.spotifyId)
 
   if(!room)
   return (
@@ -26,7 +23,7 @@ const PlaylistPage = async({ params }) => {
   )
 
   try {
-    const response = await axios.get('https://api.spotify.com/v1/me/playlists', {
+    const response = await axios.get(`https://api.spotify.com/v1/users/${room.spotifyId}/playlists`, {
         headers: {
             Authorization: `Bearer ${session.access_token}`
         }

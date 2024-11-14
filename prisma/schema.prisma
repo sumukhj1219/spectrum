@@ -13,18 +13,19 @@ model User {
   email        String   @unique
   name         String
   rooms        Room[]   @relation("UserRooms") 
-  creatorAccessToken String?        // Many-to-many relation for rooms user participates in
+  spotifyId    String?        // Many-to-many relation for rooms user participates in
   createdRooms Room[]   @relation("RoomCreator")      
   createdAt    DateTime @default(now())                // Track creation time
   updatedAt    DateTime @updatedAt                     // Track update time
 }
 
 model Room {
-  id          String   @id @default(uuid())            // Automatically generate a UUID
+  id          String   @id @default(uuid())           
   name        String
-  users       User[]   @relation("UserRooms")          // Many-to-many relation for users in the room
-  createdBy   User     @relation("RoomCreator", fields: [createdById], references: [id]) // Track the creator of the room
+  users       User[]   @relation("UserRooms")          
+  createdBy   User     @relation("RoomCreator", fields: [createdById], references: [id]) 
   createdById String
+  spotifyId    String?  
   createdAt   DateTime @default(now())                 // Track creation time
   updatedAt   DateTime @updatedAt                      // Track update time
 }
