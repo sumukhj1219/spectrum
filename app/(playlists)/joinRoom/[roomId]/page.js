@@ -42,7 +42,7 @@ return (
   <>
    <div className='flex gap-x-4'>
       <span className='text-xl font-bold '>{roomId}</span>
-      <span className='text-xl font-bold '>{room.createdBy?.name}'s Room</span> 
+      <span className='text-xl font-bold '>Created by {room.createdBy?.name}</span> 
     </div>
     <Playlist items={playlist} playlistid={playlist[0].id}/>
   </>
