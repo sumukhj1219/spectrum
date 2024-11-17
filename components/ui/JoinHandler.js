@@ -24,7 +24,7 @@ const JoinHandler = () => {
     try {
       const useremail = session?.user?.email;
 
-      const response = await axios.post('/api/joinRoom', { roomId, useremail });
+      // const response = await axios.post('/api/joinRoom', { roomId, useremail });
 
       setLoading(false)
       setRoomId("");  // Clear room ID after success
@@ -50,6 +50,7 @@ const JoinHandler = () => {
           name={loading ? 'Joining' : 'Join'}  // Show loading text
           className={`bg-green-400 w-32 py-2 text-white font-bold rounded-lg mt-6 border-green-950 $`}
           onClick={handleClick}
+          loading={loading}
         />
       </div>
     </div>
