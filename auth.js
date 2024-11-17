@@ -19,6 +19,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
+  secret:process.env.secret
   pages: {
     signIn: "/login", // Custom sign-in page
   },
@@ -29,12 +30,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.expires_at = Date.now() + (account.expires_at || 3600) * 1000; // Adjust expiration
         token.refresh_token = account.refresh_token || "";
       }
-      // Refresh token if expired
-    
-        // await prisma.user.update({
-        //   where: { email: token.email },
-        //   data: { creatorAccessToken: account.access_token }
-        // });
       
 
       if (Date.now() < token.expires_at*1000) {
