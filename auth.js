@@ -41,7 +41,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           method: "POST",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
-            "Authorization":
+            Authorization:
               "Basic " +
               Buffer.from(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`).toString("base64"),
           },
