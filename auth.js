@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import SpotifyProvider from "next-auth/providers/spotify";
+import Spotify from "next-auth/providers/spotify";
 import { Buffer } from "buffer"; // If you need to encode credentials
 import prisma from "./utils/db";
 // Define Spotify scopes
