@@ -9,8 +9,8 @@ const scope =
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     SpotifyProvider({
-      clientId: process.env.SPOTIFY_CLIENT_ID!,
-      clientSecret: process.env.SPOTIFY_CLIENT_SECRET!,
+      clientId: process.env.SPOTIFY_CLIENT_ID,
+      clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
       authorization: {
         url: "https://accounts.spotify.com/authorize",
         params: { scope },
