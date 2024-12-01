@@ -79,4 +79,5 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     maxAge: 24 * 60 * 60, // Session duration
     updateAge: 12 * 60 * 60, // Update session duration
   },
+  debug: true,
 });
