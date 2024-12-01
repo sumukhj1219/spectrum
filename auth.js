@@ -74,7 +74,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET, // Use a secure secret for NextAuth
+  secret: process.env.AUTH_SECRET, // Use a secure secret for NextAuth
   session: {
     maxAge: 24 * 60 * 60, // Session duration
     updateAge: 12 * 60 * 60, // Update session duration
