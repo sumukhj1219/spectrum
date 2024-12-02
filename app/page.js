@@ -9,8 +9,7 @@ export default async function Home() {
 
   return (
     <div>
-        <JoinHandler />
-        <CreateRoom />
+      hello
     </div>
     
   );
