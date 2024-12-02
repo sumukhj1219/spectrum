@@ -28,7 +28,6 @@ export default function RootLayout({ children }) {
           className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-7xl items-center justify-center mx-auto`}
           style={{ backgroundColor: bgColor, transition: 'background-color 0.3s ease'}} 
         >
-          <Navbar />
           {children}
         </body>
       </html>
