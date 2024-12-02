@@ -4,7 +4,7 @@ import { signIn } from "next-auth/react"; // Ensure this import
 export default function login() {
   const handleSubmit = (e) => {
     e.preventDefault();
-    signIn("spotify", {callbackUrl: "/"});
+    signIn("spotify", {callbackUrl: "https://spectrum-bice.vercel.app"});
   };
 
   return (
