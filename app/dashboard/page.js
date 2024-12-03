@@ -17,7 +17,7 @@ export default function Dashboard() {
     e.preventDefault();
 
     try {
-      await signIn("spotify", { callbackUrl: "http://localhost:3000/dashboard" });
+      await signIn("spotify", { callbackUrl: "https://spectrum-bice.vercel.app" });
     } catch (error) {
       console.error("Login failed:", error);
     }
