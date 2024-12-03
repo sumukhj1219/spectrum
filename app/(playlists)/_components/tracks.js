@@ -10,14 +10,14 @@ const Tracks = ({ playlistId, onTrackSelect }) => {
   const [bgColor, setBgColor] = useState('')  
   const [bgImage, setBgImage] = useState('')  
 
+  console.log(session?.user)
   useEffect(() => {
     const fetchTracks = async () => {
-      if (!playlistId || !session?.user.accessToken) return
-
+      if (!playlistId || !session?.user?.accessToken) return
       try {
         const response = await axios.get(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
           headers: {
-            Authorization: `Bearer ${session?.user.accessToken}`
+            Authorization: `Bearer ${session?.user?.accessToken}`
           }
         })
         setTracks(response.data.items)
@@ -28,7 +28,7 @@ const Tracks = ({ playlistId, onTrackSelect }) => {
     }
 
     fetchTracks()
-  }, [playlistId, session?.user.accessToken])
+  }, [playlistId, session?.user?.accessToken])
 
   const extractAverageColor = (imageUrl) => {
     console.log('Extracting color from image URL:', imageUrl)

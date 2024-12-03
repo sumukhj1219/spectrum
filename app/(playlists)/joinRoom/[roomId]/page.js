@@ -1,4 +1,4 @@
-'use server'
+'use server';
 
 import { auth } from '@/auth';
 import prisma from '@/utils/db';
@@ -7,7 +7,11 @@ import Playlist from '../../_components/playlist';
 
 const PlaylistPage = async ({ params }) => {
   const { roomId } = await params;
+
   const session = await auth();
+  if (!session?.user?.accessToken) {
+    return <div>User is not authenticated.</div>;
+  }
 
   const room = await prisma.room.findUnique({
     where: { id: roomId },
@@ -16,28 +20,22 @@ const PlaylistPage = async ({ params }) => {
     },
   });
 
-  console.log(room.spotifyId);
+  if (!room) {
+    return <div>No room was found</div>;
+  }
 
-  if (!room)
-    return (
-      <div className="">No room was Found</div>
-    );
-
-  let playlist = [''];
+  let playlist = [];
   try {
-    const response = await axios.get(`https://api.spotify.com/v1/users/${room.spotifyId}/playlists`, {
+    const response = await axios.get('https://api.spotify.com/v1/me/playlists', {
       headers: {
-        Authorization: `Bearer ${session?.user?.accessToken}`
-      }
+        Authorization: `Bearer ${session.user.accessToken}`,
+      },
     });
 
-    playlist = response.data.items
-      .filter((item) => item.name.toLowerCase() !== 'testingplaylist') // Exclude 'testingplaylist'
-      .reverse(); // Reverse the order
-
-    playlist.pop(); // Remove the last playlist if needed
+    playlist = response.data.items;
+    console.log('Playlists:', playlist);
   } catch (error) {
-    console.log(error);
+    console.error('Error fetching playlists:', error.response?.data || error.message);
   }
 
   return (

@@ -12,7 +12,7 @@ const Playlist = ({ items, playlistid }) => {
     setPlaylistId(pId)
     setPlaylistName(pName)
   }
-
+  console.log(items)
   return (
     <div className='grid grid-cols-8 overflow-hidden'>
       <div
