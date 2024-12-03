@@ -35,7 +35,6 @@ const Playlist = ({ items, playlistid }) => {
           {items.map((playlist) => (
             <div
             key={playlist.id}
-
               className={`p-3 ring-2 ${playlistId === playlist.id ? 'ring-green-400' : 'ring-white'}  bg-transparent bg-neutral-950 bg-opacity-50 m-4 w-52 rounded-xl flex items-center justify-center `}
               onClick={() => handlePlaylists(playlist.id, playlist.name)}
             >

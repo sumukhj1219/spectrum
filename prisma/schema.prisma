@@ -12,7 +12,7 @@ model User {
   id           String   @id @default(uuid())  // Automatically generate a UUID
   email        String   @unique
   name         String
-  password     String
+  password     String?
   rooms        Room[]   @relation("UserRooms") 
   spotifyId    String?        // Many-to-many relation for rooms user participates in
   createdRooms Room[]   @relation("RoomCreator")      
