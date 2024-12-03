@@ -17,7 +17,7 @@ const Tracks = ({ playlistId, onTrackSelect }) => {
       try {
         const response = await axios.get(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
           headers: {
-            Authorization: `Bearer ${session.user.accessToken}`
+            Authorization: `Bearer ${session?.user.accessToken}`
           }
         })
         setTracks(response.data.items)

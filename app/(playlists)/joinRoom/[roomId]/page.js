@@ -27,7 +27,7 @@ const PlaylistPage = async ({ params }) => {
   try {
     const response = await axios.get(`https://api.spotify.com/v1/users/${room.spotifyId}/playlists`, {
       headers: {
-        Authorization: `Bearer ${session.user.accessToken}`
+        Authorization: `Bearer ${session?.user?.accessToken}`
       }
     });
 
